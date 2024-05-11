@@ -1,0 +1,30 @@
+============================================TO create a microsoft Entra ID User
+
+For connecting to Azure - 
+Connect-AzureAD
+
+
+
+Run the following command to retrieve and display the primary Domain Name System (DNS) domain name of the Microsoft Entra tenant:
+$aadDomainName = ((Get-AzureAdTenantDetail).VerifiedDomains)[0].Name
+$aadDomainName
+
+
+Run the following commands to create Microsoft Entra ID users that you'll use to test Microsoft Entra ID authentication:
+
+$passwordProfile = New-Object -TypeName Microsoft.Open.AzureAD.Model.PasswordProfile
+$passwordProfile.Password = 'Pa55w.rd1234'
+$passwordProfile.ForceChangePasswordNextLogin = $false
+New-AzureADUser -AccountEnabled $true -DisplayName 'aad_lab_user-40514421@LODSPRODMCA.onmicrosoft.com' -PasswordProfile $passwordProfile -MailNickName 'aad_lab_user-40514421@LODSPRODMCA.onmicrosoft.com' -UserPrincipalName "aad_lab_user-40514421@LODSPRODMCA.onmicrosoft.com@$aadDomainName" 
+
+==============================================================================
+
+following command to use the Azure Functions Core Tools to create a new local Functions project in the current directory using the dotnet runtime:
+
+func init --worker-runtime dotnet-isolated --target-framework net8.0 --force
+
+
+
+Run the following command to use the Azure Functions Core Tools to create a new function named FileParser using the HTTP trigger template:
+
+func new --template "HTTP trigger" --name "FileParser"
